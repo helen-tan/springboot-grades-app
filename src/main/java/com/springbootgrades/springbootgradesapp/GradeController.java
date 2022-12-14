@@ -30,4 +30,10 @@ public class GradeController {
         model.addAttribute("grades", studentGrades);
         return "grades";
     }
+
+    @GetMapping("/")
+    public String gradeForm(Model model) {
+        model.addAttribute("grade", new Grade("Harry", "Potions", "C-"));
+        return "form";
+    }
 }
