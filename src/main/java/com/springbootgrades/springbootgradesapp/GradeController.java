@@ -7,15 +7,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GradeController {
     // List of grade objects (only populated when the controller is first initialized)
-    List<Grade> studentGrades = Arrays.asList(
-        new Grade("Harry", "Potions", "C-"),
-        new Grade("Hermoine", "Arithmancy", "A+"),
-        new Grade("Neville", "Charms", "A-")
-    );
+    List<Grade> studentGrades = new ArrayList<>();
     
     // Returns the grades html (will find the view from the templates folder)
     // Model is directly accessed from the handler method's parameters
@@ -33,7 +30,14 @@ public class GradeController {
 
     @GetMapping("/")
     public String gradeForm(Model model) {
-        model.addAttribute("grade", new Grade("Harry", "Potions", "C-"));
+        model.addAttribute("grade", new Grade());
         return "form";
+    }
+
+    @PostMapping("/handleSubmit")
+    public String submitForm(Grade grade) {
+        //System.out.println(grade);
+        studentGrades.add(grade);
+        return "redirect:/grades";
     }
 }
