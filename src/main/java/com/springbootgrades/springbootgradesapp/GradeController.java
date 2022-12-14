@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class GradeController {
     
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "somehtmlview";
+    @GetMapping("/grades")
+    // Returns the grades html (will find the view from the templates folder)
+    public String getGrades() {
+        return "grades";
     }
 }
