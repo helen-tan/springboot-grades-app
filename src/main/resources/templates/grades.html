@@ -27,10 +27,16 @@
             <td th:text="${grade.score}"></td>
         </tr> -->
         <!-- Bind entire row to the grade Model object -->
-        <tr th:object="${grade}">
+        <!-- <tr th:object="${grade}">
             <td th:text="*{name}"></td>
             <td th:text="*{subject}"></td>
             <td th:text="*{score}"></td>
+        </tr> -->
+
+        <tr th:each="grade: ${grades}">
+            <td th:text="${grade.name}"></td>
+            <td th:text="${grade.subject}"></td>
+            <td th:text="${grade.score}"></td>
         </tr>
       </table>
     </div>
