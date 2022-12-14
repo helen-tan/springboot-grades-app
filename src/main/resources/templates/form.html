@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Form</title>
+    <!-- Custom stylesheets -->
+    <!-- Thymeleaf link expression will by default look into static -->
+    <link th:href="@{/form-stylesheet.css}" rel="stylesheet">
+  </head>    
+  <body>
+    <div class="topnav">
+      <a>Form</a>
+      <a>Grades</a>
+    </div>   
+    <div class="container">
+      <h2> Grade Portal </h2>
+      <form method="post"> 
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Score">  
+        <input type="text" placeholder="Subject">
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>  
+    </div>
+</body>
+</html>
