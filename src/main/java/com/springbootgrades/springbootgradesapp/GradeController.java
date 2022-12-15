@@ -30,16 +30,15 @@ public class GradeController {
     }
 
     @GetMapping("/")
-    public String getForm(Model model, @RequestParam(required = false) String name) {
+    public String getForm(Model model, @RequestParam(required = false) String id) {
         Grade grade;
 
-        if (getGradeIndex(name) == -1000) {
+        if (getGradeIndex(id) == -1000) {
             grade = new Grade();
         } else {
-            grade = studentGrades.get(getGradeIndex(name));
+            grade = studentGrades.get(getGradeIndex(id));
         }
 
-        System.out.println(name);
         model.addAttribute("grade", grade);
         return "form";
     }
@@ -47,7 +46,7 @@ public class GradeController {
     @PostMapping("/handleSubmit")
     public String submitForm(Grade grade) {
         //System.out.println(grade);
-        int index = getGradeIndex(grade.getName());
+        int index = getGradeIndex(grade.getId());
         // Add new grade only if it doesn't aldy exist
         if(index == -1000) {
             studentGrades.add(grade);
@@ -57,9 +56,9 @@ public class GradeController {
         return "redirect:/grades";
     }
 
-    public Integer getGradeIndex(String name) {
+    public Integer getGradeIndex(String id) {
         for (int i = 0; i < studentGrades.size(); i++) {
-            if (studentGrades.get(i).getName().equals(name)) {
+            if (studentGrades.get(i).getId().equals(id)) {
                 return i;
             }
         }
