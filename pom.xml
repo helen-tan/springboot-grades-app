@@ -46,7 +46,7 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<!-- Spring Boot Validation Dependency -->
+		<!-- Spring Boot Validation Dependency: Provides annotations for field validation -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
