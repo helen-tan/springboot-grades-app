@@ -33,7 +33,7 @@ public class GradeController {
     public String getForm(Model model, @RequestParam(required = false) String id) {
         Grade grade;
 
-        if (getGradeIndex(id) == -1000) {
+        if (getGradeIndex(id) == Constants.NOT_FOUND) {
             grade = new Grade();
         } else {
             grade = studentGrades.get(getGradeIndex(id));
@@ -48,7 +48,7 @@ public class GradeController {
         //System.out.println(grade);
         int index = getGradeIndex(grade.getId());
         // Add new grade only if it doesn't aldy exist
-        if(index == -1000) {
+        if(index == Constants.NOT_FOUND) {
             studentGrades.add(grade);
         } else {
             studentGrades.set(index, grade);
@@ -62,6 +62,6 @@ public class GradeController {
                 return i;
             }
         }
-        return -1000;
+        return Constants.NOT_FOUND;
     }
 }
