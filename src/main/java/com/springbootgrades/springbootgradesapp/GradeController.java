@@ -32,11 +32,12 @@ public class GradeController {
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
         Grade grade;
+        int index = getGradeIndex(id);
 
-        if (getGradeIndex(id) == Constants.NOT_FOUND) {
+        if (index == Constants.NOT_FOUND) {
             grade = new Grade();
         } else {
-            grade = studentGrades.get(getGradeIndex(id));
+            grade = studentGrades.get(index);
         }
 
         model.addAttribute("grade", grade);
