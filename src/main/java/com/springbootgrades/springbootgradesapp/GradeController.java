@@ -48,6 +48,7 @@ public class GradeController {
 
     @PostMapping("/handleSubmit")
     public String submitForm(@Valid Grade grade, BindingResult result) {
+        // @Valid will use the logic inside ScoreValidator to check if valid
         // Print out boolean to check if user inputs have errors
         System.out.println("Has errors?" + result.hasErrors());
 
