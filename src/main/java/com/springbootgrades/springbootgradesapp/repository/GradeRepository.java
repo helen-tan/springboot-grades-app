@@ -5,7 +5,8 @@ import java.util.List;
 
 import com.springbootgrades.springbootgradesapp.Grade;
 
-// Stores CRUD operations
+// Repository class is the Data Access Layer
+// Only Repo class can perform CRUD operations on the Data store!
 
 public class GradeRepository {
      // List of grade objects (only populated when the controller is first initialized)
