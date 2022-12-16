@@ -18,8 +18,8 @@ import jakarta.validation.Valid;
 
 @Controller
 public class GradeController {
-    // Controller to get data from Repository - Create an instance of the Repository
-    GradeRepository gradeRepository = new GradeRepository();
+    // Controller to communicate w Service - Create an instance of the Service
+    GradeService gradeService = new GradeService();
     
     // Returns the grades html (will find the view from the templates folder)
     // Model is directly accessed from the handler method's parameters
@@ -31,23 +31,14 @@ public class GradeController {
         // studentGrades.add(new Grade("Neville", "Charms", "A-"));
        
         // Store data in model
-        model.addAttribute("grades", gradeRepository.getGrades());
+        model.addAttribute("grades", gradeService.getGrades());
         return "grades";
     }
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
-        Grade grade;
-        int index = getGradeIndex(id);
-
-        if (index == Constants.NOT_FOUND) {
-            grade = new Grade();
-        } else {
-            // grade = studentGrades.get(index);
-            grade = gradeRepository.getGrade(index);
-        }
-
-        model.addAttribute("grade", grade);
+        
+        model.addAttribute("grade", gradeService.getGradeById(id));
         return "form";
     }
 
@@ -60,27 +51,11 @@ public class GradeController {
         // If there are errors, keep user inside the form
         if (result.hasErrors()) return "form";
 
-        int index = getGradeIndex(grade.getId());
-        // Add new grade only if it doesn't aldy exist
-        if(index == Constants.NOT_FOUND) {
-            //studentGrades.add(grade);
-            gradeRepository.addGrade(grade); // Create
-        } else {
-            //studentGrades.set(index, grade);
-            gradeRepository.updateGrade(grade, index); // Update
-        }
+        // Submit the user input grade to the Service
+        gradeService.submitGrade(grade);
+
         // Redirect user if form submission is successful
         return "redirect:/grades";
     }
 
-    public Integer getGradeIndex(String id) {
-        List<Grade> studentGrades = gradeRepository.getGrades();
-
-        for (int i = 0; i < studentGrades.size(); i++) {
-            if (studentGrades.get(i).getId().equals(id)) {
-                return i;
-            }
-        }
-        return Constants.NOT_FOUND;
-    }
 }
