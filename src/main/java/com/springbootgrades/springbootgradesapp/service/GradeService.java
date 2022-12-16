@@ -2,10 +2,15 @@ package com.springbootgrades.springbootgradesapp.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.springbootgrades.springbootgradesapp.Constants;
 import com.springbootgrades.springbootgradesapp.Grade;
 import com.springbootgrades.springbootgradesapp.repository.GradeRepository;
 
+// @Component converts the GradeService class into a component and creates an object out of it (a bean)
+// Stores the bean in the Spring Container
+@Component 
 public class GradeService {
     // Service to get data from Repository - Create an instance of the Repository
     GradeRepository gradeRepository = new GradeRepository();

@@ -1,5 +1,6 @@
 package com.springbootgrades.springbootgradesapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +15,10 @@ import jakarta.validation.Valid;
 
 @Controller
 public class GradeController {
-    // Controller to communicate w Service - Create an instance of the Service
-    GradeService gradeService = new GradeService();
+    // Controller to communicate w Service
+    // Dependency Injection: Autowire the bean into the gradeService variable from the Spring container (Do not create an instance of the Service)
+    @Autowired
+    GradeService gradeService;
     
     // Returns the grades html (will find the view from the templates folder)
     // Model is directly accessed from the handler method's parameters
