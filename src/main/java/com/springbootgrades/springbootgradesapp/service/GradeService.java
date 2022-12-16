@@ -2,6 +2,7 @@ package com.springbootgrades.springbootgradesapp.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.springbootgrades.springbootgradesapp.Constants;
@@ -12,8 +13,10 @@ import com.springbootgrades.springbootgradesapp.repository.GradeRepository;
 // Stores the bean in the Spring Container
 @Component 
 public class GradeService {
-    // Service to get data from Repository - Create an instance of the Repository
-    GradeRepository gradeRepository = new GradeRepository();
+    // Service to get data from Repository 
+    // Dependency Injection: Autowire the bean into the gradeRepository variable from the Spring container (Do not create an instance of the Repository)
+    @Autowired
+    GradeRepository gradeRepository;
 
      // GET/READ grade
      public Grade getGrade(int index) {
