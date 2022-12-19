@@ -34,7 +34,7 @@ class SpringbootGradesAppApplicationTests {
 	}
 
 	// INTEGRATION TESTS
-	// Test if app can hadle GET reqs on empty path
+	// Test if app can hadle GET reqs on empty path ("/")
 	@Test
 	public void testShowGradeForm() throws Exception {
 		RequestBuilder request = MockMvcRequestBuilders.get("/?id=123");
@@ -44,4 +44,20 @@ class SpringbootGradesAppApplicationTests {
 		.andExpect(view().name("form"))
 		.andExpect(model().attributeExists("grade")); 
 	}
+
+	// perform mock request on the path /handleSubmit
+	// Test will validate the lifecycle of a successful submission
+	@Test
+	public void testSuccessfulSubmission() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders.post("/handleSubmit")
+		.param("name", "Harry")
+		.param("subject", "Potions")
+		.param("score", "C-");
+
+		mockMvc.perform(request)
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl("/grades"));
+
+	}
+
 }
