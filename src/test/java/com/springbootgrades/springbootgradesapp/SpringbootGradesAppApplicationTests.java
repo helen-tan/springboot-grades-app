@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.springbootgrades.springbootgradesapp.controller.GradeController;
 
@@ -30,4 +33,15 @@ class SpringbootGradesAppApplicationTests {
 		assertNotNull(mockMvc);
 	}
 
+	// INTEGRATION TESTS
+	// Test if app can hadle GET reqs on empty path
+	@Test
+	public void testShowGradeForm() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders.get("/?id=123");
+
+		mockMvc.perform(request) // will traverse the application layers
+		.andExpect(status().is2xxSuccessful()) // make assertions(verifications) with regards to the model, view and status/response
+		.andExpect(view().name("form"))
+		.andExpect(model().attributeExists("grade")); 
+	}
 }
