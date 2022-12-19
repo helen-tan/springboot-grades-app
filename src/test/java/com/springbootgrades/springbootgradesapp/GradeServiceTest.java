@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.springbootgrades.springbootgradesapp.repository.GradeRepository;
 import com.springbootgrades.springbootgradesapp.service.GradeService;
-import com.springbootgrades.springbootgradesapp.Grade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GradeServiceTest {
