@@ -35,6 +35,7 @@ public class GradeServiceTest {
     @Test
     public void getGradesFromRepoTest() {
         // 1. Mock the data needed to carry out the unit test
+        // bcos the method getGrades() is called in the getGrades method in the service. So we specify the result of that method call here
         when(gradeRepository.getGrades()).thenReturn(Arrays.asList(
             new Grade("Harry", "Potions", "C-"),
             new Grade("Hermoine", "Arithmancy", "A+")
