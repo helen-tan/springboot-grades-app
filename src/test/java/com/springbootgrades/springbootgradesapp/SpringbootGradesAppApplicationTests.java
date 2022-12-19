@@ -57,7 +57,18 @@ class SpringbootGradesAppApplicationTests {
 		mockMvc.perform(request)
 		.andExpect(status().is3xxRedirection())
 		.andExpect(redirectedUrl("/grades"));
-
 	}
 
+	// if user enter invalid data
+	@Test
+	public void testUnsuccessfulSubmission() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders.post("/handleSubmit")
+			.param("name", " ")
+			.param("subject", " ")
+			.param("score", "R+");
+
+			mockMvc.perform(request)
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("form"));
+	}
 }
