@@ -94,4 +94,17 @@ public class GradeServiceTest {
         // Check that addGrade() method gets called at least 1 time
         verify(gradeRepository, times(1)).addGrade(newGrade);
     }
+
+    @Test
+    public void updateGradeTest() {
+        Grade grade = new Grade("Harry", "Potions", "C-");
+
+        when(gradeRepository.getGrades()).thenReturn(Arrays.asList(grade));
+        when(gradeRepository.getGrade(0)).thenReturn(grade);
+
+        grade.setScore("A-"); // simulate a change in scores, so that the data can change on update
+        gradeService.submitGrade(grade);
+
+        verify(gradeRepository, times(1)).updateGrade(grade, 0);
+    }
 }
