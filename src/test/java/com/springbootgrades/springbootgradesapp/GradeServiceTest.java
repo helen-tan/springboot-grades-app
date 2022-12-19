@@ -32,15 +32,35 @@ public class GradeServiceTest {
     // Test if getGrades can recieve the grades from the repo
     @Test
     public void getGradesFromRepoTest() {
+        // 1. Mock the data needed to carry out the unit test
         when(gradeRepository.getGrades()).thenReturn(Arrays.asList(
             new Grade("Harry", "Potions", "C-"),
             new Grade("Hermoine", "Arithmancy", "A+")
             ));
 
         List<Grade> result = gradeService.getGrades();
-
-        // Compare the value we were expecting vs the actual value we got
+            
+        // 2. Call the method that you want to test
+        // 3. Compare the value we were expecting vs the actual value we got
         assertEquals("Harry", result.get(0).getName());
         assertEquals("Arithmancy", result.get(1).getSubject());
     }
+
+    @Test
+    public void getGradeByIndexTest() {
+        // 1. Mock data needed
+        Grade grade = new Grade("Harry", "Potions", "C-");
+
+        when(gradeRepository.getGrades()).thenReturn(Arrays.asList(grade));
+        when(gradeRepository.getGrade(0)).thenReturn(grade);
+
+        // 2. Call method that you want to test - getGradeIndex() function
+        int valid = gradeService.getGradeIndex(grade.getId());
+        int notFound = gradeService.getGradeIndex("123");
+
+        // 3. Check if method is bahaving correctly
+        assertEquals(0, valid);
+        assertEquals(Constants.NOT_FOUND, notFound);
+    }
+
 }
