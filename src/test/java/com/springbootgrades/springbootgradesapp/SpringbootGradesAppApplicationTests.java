@@ -71,4 +71,15 @@ class SpringbootGradesAppApplicationTests {
 			.andExpect(status().is2xxSuccessful())
 			.andExpect(view().name("form"));
 	}
+
+	// perform mock request on the path /grades
+	// if this test passes, it means a req on the path /grades will return the right view and right data
+	@Test
+	public void testGetGrades() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders.get("/grades");
+		mockMvc.perform(request)
+		.andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("grades"))
+		.andExpect(model().attributeExists("grades"));
+	}
 }
