@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -63,4 +65,33 @@ public class GradeServiceTest {
         assertEquals(Constants.NOT_FOUND, notFound);
     }
 
+    @Test
+    public void getGradeByIdTest() {
+        // 1. Mock data needed
+        Grade grade = new Grade("Harry", "Potions", "C-");
+
+        when(gradeRepository.getGrades()).thenReturn(Arrays.asList(grade));
+        when(gradeRepository.getGrade(0)).thenReturn(grade);
+
+        // 2. Call method you want to test
+        String id = grade.getId();
+        Grade result = gradeService.getGradeById(id);
+
+        // 3. Check if method is bahving correctly
+        assertEquals(grade, result);
+    }
+
+    @Test
+    public void addGradeTest() {
+        Grade grade = new Grade("Harry", "Potions", "C-");
+
+        when(gradeRepository.getGrades()).thenReturn(Arrays.asList(grade));
+        when(gradeRepository.getGrade(0)).thenReturn(grade);
+
+        Grade newGrade = new Grade("Hermoine", "Arithmancy", "A+");
+        gradeService.submitGrade(newGrade);
+
+        // Check that addGrade() method gets called at least 1 time
+        verify(gradeRepository, times(1)).addGrade(newGrade);
+    }
 }
